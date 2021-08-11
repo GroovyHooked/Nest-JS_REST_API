@@ -1,5 +1,5 @@
 import { Controller, Post, Body, Get, Put, Delete, Param, Query } from '@nestjs/common';
-import { ApiTags, ApiCreatedResponse, ApiQuery } from '@nestjs/swagger';
+import { ApiTags, ApiCreatedResponse, ApiQuery, ApiParam } from '@nestjs/swagger';
 import { Scooter } from './scooter.entity';
 import { ScootersService } from './scooters.service';
 
@@ -16,6 +16,7 @@ export class ScootersController {
     
     @Get(':id')
     @ApiQuery({ name: 'withRepairs', allowEmptyValue: true, example: '1' })
+    @ApiParam({ name: 'id', allowEmptyValue: true, example: '1' })
     get(@Param() params, @Query('withRepairs') withRepairs: String) {
         if (withRepairs) {
             return this.service.getScooterWithRepairs(params.id);
@@ -41,7 +42,7 @@ export class ScootersController {
     insertScootAndRepair(@Param() params){
         return this.service.insertScooterWithRepair(params.name, params.motorization, params.brand, params.model, params.mileage, params.shortname, params.description, params.price)
     }
-    
+
     @Put()
     update(@Body() scooter: Scooter) {
         return this.service.updateScooter(scooter);

@@ -20,7 +20,7 @@ export class ScootersService {
         });
     }
 
-    async getScooterWithRepairs(_id: number): Promise<Scooter> {
+     getScooterWithRepairs(_id: number): Promise<Scooter> {
         return createQueryBuilder("scooter")
             .leftJoinAndSelect("Scooter.repairs", "repair", "scooter.id = repair.scooterId")
             .where("scooter.id = :id", { id: _id })

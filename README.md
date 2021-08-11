@@ -38,6 +38,7 @@ The REST API to the example app is described below.
      keep-alive: timeout=5  
      x-powered-by: Express 
 
+    []
 
 ## Get a specific Scooter with his Repairs
 
@@ -56,3 +57,21 @@ The REST API to the example app is described below.
     ETag	W/"64-TFXUmrht64EVm0v7ZZu8EAY4rYg"
     Keep-Alive	timeout=5
     X-Powered-By	Express
+
+    {
+        "id": 1,
+        "name": "string",
+        "motorization": 0,
+        "brand": "string",
+        "model": "string",
+        "mileage": 0,
+        "repairs": [
+            {
+            "id": 1,
+            "shortname": "string",
+            "description": "string",
+            "price": 10,
+            "scooterId": 1
+            }
+        ]
+    }
