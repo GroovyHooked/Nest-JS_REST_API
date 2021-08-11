@@ -1,7 +1,6 @@
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, PrimaryGeneratedColumn, OneToMany } from "typeorm";
 import { ApiProperty } from "@nestjs/swagger";
 import { Repair } from "src/repairs/repair.entity";
-
 
 @Entity("scooter")
 export class Scooter {
@@ -9,27 +8,44 @@ export class Scooter {
     @PrimaryGeneratedColumn({ type: "int" })
     id: number;
 
-    @ApiProperty()
-    @Column()
+    @ApiProperty({
+        description: 'The name of the owner',
+        type: 'String'
+      })
+    @Column({ type: "varchar", length: 255 })
     name: string;
 
-    @ApiProperty()  
-    @Column()
+    @ApiProperty({
+        description: 'Motorization of the vehicule',
+        type: 'Number'
+      })  
+    @Column({ type: "int" })
     motorization: number;
 
-    @ApiProperty()
-    @Column()
+    @ApiProperty({
+        description: 'Brand of the vehicule',
+        type: 'String'
+      })
+    @Column({ type: "varchar", length: 255 })
     brand: string;
 
-    @ApiProperty()
-    @Column()
+    @ApiProperty({
+        description: 'Model of the vehicule',
+        type: 'String'
+      })
+    @Column({ type: "varchar", length: 255 })
     model: string
 
-    @ApiProperty()
-    @Column()
+    @ApiProperty({
+        description: 'Mileage of the vehicule',
+        type: 'Number'
+      })
+    @Column({ type: "int" })
     mileage: number;
 
-    @ApiProperty()
+    @ApiProperty({
+        description: 'OneToMany Relationship with repairs table',
+      })
     @OneToMany( type => Repair, repair => repair.scooter)
     repairs: Repair[];
 
