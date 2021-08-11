@@ -40,6 +40,34 @@ The REST API to the example app is described below.
 
     []
 
+## Create a single Scooter
+
+### Request
+
+`Post 1 Scooter`
+
+    curl -X 'POST' 'http://localhost:3000/scooters' \
+      -H 'accept: */*' \
+      -H 'Content-Type: application/json' \
+      -d '{
+      "name": "string",
+      "motorization": 0,
+      "brand": "string",
+      "model": "string",
+      "mileage": 0,
+      "repairs": [
+        "string"
+      ]
+    }'
+
+### Response
+
+    connection: keep-alive 
+    content-length: 0 
+    date: Wed,11 Aug 2021 10:38:28 GMT 
+    keep-alive: timeout=5 
+    x-powered-by: Express 
+
 ## Get a specific Scooter with his Repairs
 
 ### Request

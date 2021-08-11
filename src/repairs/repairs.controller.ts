@@ -1,5 +1,5 @@
 import { Controller, Post, Body, Get, Put, Delete, Param } from '@nestjs/common';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiParam, ApiTags } from '@nestjs/swagger';
 import { Repair } from './repair.entity';
 import { RepairsService } from './repairs.service';
 
@@ -15,6 +15,7 @@ export class RepairsController {
     }
     
     @Get(':id')
+    @ApiParam({ name: 'id', allowEmptyValue: true, example: '1' })
     get(@Param() params) {
         return this.service.getRepair(params.id);
     }
@@ -30,6 +31,7 @@ export class RepairsController {
     }
 
     @Delete(':id')
+    @ApiParam({ name: 'id', allowEmptyValue: true, example: '1' })
     delete(@Param() params) {
         return this.service.deleteRepair(params.id);
     }

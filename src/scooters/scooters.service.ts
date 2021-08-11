@@ -57,13 +57,14 @@ export class ScootersService {
                                 .insert()
                                 .into(Repair)
                                 .values({
-                                    id: 5,
+                                    id: 3,
                                     shortname: newRepair.shortname,
                                     description: newRepair.description,
                                     price: newRepair.price,
-                                    scooterId: 2
+                                    scooterId: 1
                                 })
                                 .execute();
+                            
 
                 console.log('Processed')
             
