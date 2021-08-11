@@ -11,7 +11,7 @@ export class Repair {
 
     @ApiProperty()
     @Column({ type: "varchar", length: 25 })
-    name: string;
+    shortname: string;
 
     @ApiProperty()
     @Column({ type: "varchar", length: 255 })

@@ -29,9 +29,6 @@ export class ScootersController {
         return this.service.createScooter(scooter);
     }
     
-    @Post(':name/:motorization/:brand/:model/:mileage/:shortname/:description/:price')
-
-
     @Put()
     update(@Body() scooter: Scooter) {
         return this.service.updateScooter(scooter);
