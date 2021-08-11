@@ -6,8 +6,8 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
   const config = new DocumentBuilder()
-  .setTitle('List of scooters and repairs')
-  .setDescription('API description')
+  .setTitle('Scooters & Repairs')
+  .setDescription('List of actions to communicate with the database')
   .setVersion('1.0')
   .build();
 

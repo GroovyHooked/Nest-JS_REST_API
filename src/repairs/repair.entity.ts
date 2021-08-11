@@ -8,31 +8,19 @@ export class Repair {
     @PrimaryGeneratedColumn({ type: "int" })
     id: number;
 
-    @ApiProperty({
-        description: 'The name of the repair',
-        type: 'String'
-      })
+    @ApiProperty()
     @Column({ type: "varchar", length: 25 })
     shortname: string;
 
-    @ApiProperty({
-        description: 'Description of the problem',
-        type: 'String'
-      })
+    @ApiProperty()
     @Column({ type: "varchar", length: 255 })
     description: string;
 
-    @ApiProperty({
-        description: 'Price of the repair',
-        type: 'Number'
-    })
-    @Column({ type: "int" })
+    @ApiProperty()
+    @Column()
     price: number;
 
-    @ApiProperty({
-            description: 'Id of the scooter that is related to the repair',
-            type: 'Number'
-        })
+    @ApiProperty()
     @Column()
     scooterId: number;
 
