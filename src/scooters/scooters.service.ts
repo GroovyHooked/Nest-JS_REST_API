@@ -27,6 +27,14 @@ export class ScootersService {
             .getOne() as Promise<Scooter>
     }
 
+    getScooterName(_name: string): Promise<Scooter> {
+        return this.scootersRepo.findOne({
+            select: ["id"],
+            where: [{ "name": _name }],
+        });
+    }
+
+
     async insertScooterWithRepair(
         name: string,
         motorization: number,
@@ -50,14 +58,14 @@ export class ScootersService {
                 newRepair.shortname = repairName;
                 newRepair.description = description;
                 newRepair.price = price;
-
-
+                newRepair.scooterId = newScooter.id
+                console.log("scooterId = " + newScooter.id)
                 this.scootersRepo.save(newScooter);
                 this.scootersRepo.createQueryBuilder('repairs')
                                 .insert()
                                 .into(Repair)
                                 .values({
-                                    id: 3,
+                                    id: 7,
                                     shortname: newRepair.shortname,
                                     description: newRepair.description,
                                     price: newRepair.price,

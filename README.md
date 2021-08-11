@@ -16,11 +16,17 @@ The REST API to the example app is described below.
 
     npm install
 
+`Launch a database`
+
+    Launch a MySQL, create a database and configure access and settings in ormconfig.json
+
 `Run the application`
 
     npm run start
 
-## Get list of Things
+You can access the API interface which is located at the root of the project on localhost
+
+## Get list of Scooters
 
 ### Request
 
@@ -103,3 +109,19 @@ The REST API to the example app is described below.
             }
         ]
     }
+
+## Create a Scooter and a Repair (Beta)
+
+### Request 
+
+`POST /scooters/{name}{motorization}{Brand}{Model}{mileage}{shortname}{description}{price}`
+
+    curl -X 'POST' 'http://localhost:3000/scooters/Martin/50/Vespa/Sneeze/3400/Reparations/Moteur/180' -H 'accept: */*' 
+
+### Response
+
+    connection: keep-alive 
+    content-length: 0 
+    date: Wed, 11 Aug 2021 12:00:46 GMT
+    keep-alive: timeout=5 
+    x-powered-by: Express

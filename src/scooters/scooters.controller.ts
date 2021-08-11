@@ -31,7 +31,7 @@ export class ScootersController {
     }
     
     @Post(':name/:motorization/:brand/:model/:mileage/:shortname/:description/:price')
-    @ApiQuery({ name: 'price', allowEmptyValue: false, example: '180' })
+    @ApiParam({ name: 'price', allowEmptyValue: false, example: '180' })
     @ApiParam({ name: 'description', allowEmptyValue: false, example: 'Moteur' })
     @ApiParam({ name: 'shortname', allowEmptyValue: false, example: 'Reparations' })
     @ApiParam({ name: 'mileage', allowEmptyValue: false, example: '3400' })
@@ -42,6 +42,7 @@ export class ScootersController {
     insertScootAndRepair(@Param() params){
         return this.service.insertScooterWithRepair(params.name, params.motorization, params.brand, params.model, params.mileage, params.shortname, params.description, params.price)
     }
+
 
     @Put()
     update(@Body() scooter: Scooter) {
