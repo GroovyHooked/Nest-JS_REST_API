@@ -32,6 +32,12 @@ export class ScootersService {
             .getOne() as Promise<Scooter>
     }
 
+    async insertBoth(scooter: Scooter, repair: Repair){
+        await this.scootersRepo.insert(scooter)
+        repair.scooterId = scooter.id
+        await this.repairRepo.insert(repair)
+    }
+
     insertScooterWithRepair(
         name: string,
         motorization: number,
@@ -75,17 +81,18 @@ export class ScootersService {
     }
 
     async createScooter(scooter: Scooter) {
-        this.scootersRepo.insert(scooter)
+        await this.scootersRepo.insert(scooter)
     }
 
     async createRepair(repair: Repair) {
-        this.repairRepo.insert(repair)
+        await this.repairRepo.insert(repair)
     }
     async updateScooter(scooter: Scooter) {
-        this.scootersRepo.save(scooter)
+        await this.scootersRepo.save(scooter)
     }
 
     async deleteScooter(scooter: Scooter) {
-        this.scootersRepo.delete(scooter);
+        await this.scootersRepo.delete(scooter);
     }
+
 }

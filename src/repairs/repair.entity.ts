@@ -24,7 +24,7 @@ export class Repair {
     @Column({nullable: true})
     scooterId: number;
 
-    @ManyToOne( () => Scooter, scooter => scooter.repairs)
+    @ManyToOne( () => Scooter, scooter => scooter.repairs, {onDelete: 'SET NULL'})
     @JoinColumn({ name: "scooterId"})
     scooter: Scooter;
 

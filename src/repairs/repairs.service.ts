@@ -21,14 +21,14 @@ export class RepairsService {
     }
 
     async createRepair(repair: Repair) {
-        this.repairsRepo.insert(repair)
+        await this.repairsRepo.insert(repair)
     }
 
     async updateRepair(repair: Repair) {
-        this.repairsRepo.save(repair)
+        await this.repairsRepo.save(repair)
     }
 
     async deleteRepair(repair: Repair) {
-        this.repairsRepo.delete(repair);
+        await this.repairsRepo.delete(repair);
     }
 }
