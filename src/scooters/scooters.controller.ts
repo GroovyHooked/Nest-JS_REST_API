@@ -48,7 +48,6 @@ export class ScootersController {
         return this.service.insertScooterWithRepair(name, motorization, brand, model, mileage, shortname, description, price)
     }
 
-
     @Put()
     update(@Body() scooter: Scooter) {
         return this.service.updateScooter(scooter);

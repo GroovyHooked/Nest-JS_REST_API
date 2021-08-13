@@ -9,7 +9,7 @@ export class Repair {
     id: number;
 
     @ApiProperty()
-    @Column()
+    @Column("varchar", { length: 25 })
     shortname: string;
 
     @ApiProperty()

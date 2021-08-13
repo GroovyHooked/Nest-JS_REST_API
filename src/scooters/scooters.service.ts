@@ -14,7 +14,7 @@ export class ScootersService {
         public repairRepo: Repository<Repair>
         ){}
 
-      getScooters(): Promise<Scooter[]> {
+    getScooters(): Promise<Scooter[]> {
         return  this.scootersRepo.find();
     }
 
@@ -25,24 +25,14 @@ export class ScootersService {
         });
     }
 
-     getScooterWithRepairs(_id: number): Promise<Scooter> {
+    getScooterWithRepairs(_id: number): Promise<Scooter> {
         return createQueryBuilder("scooter")
             .leftJoinAndSelect("Scooter.repairs", "repair", "scooter.id = repair.scooterId")
             .where("scooter.id = :id", { id: _id })
             .getOne() as Promise<Scooter>
     }
 
-  
-
-    getScooterName(_name: string): Promise<Scooter> {
-        return this.scootersRepo.findOne({
-            select: ["id"],
-            where: [{ "name": _name }],
-        });
-    }
-
-
-    async insertScooterWithRepair(
+    insertScooterWithRepair(
         name: string,
         motorization: number,
         brand: string,
@@ -65,7 +55,7 @@ export class ScootersService {
                 newRepair.shortname = repairName;
                 newRepair.description = description;
                 newRepair.price = price;
-                newRepair.scooter = newScooter;
+                newRepair.scooterId = newScooter.id;
 
                 console.log("newRepair.scooter = " + newRepair)
                 this.scootersRepo.save(newScooter);
@@ -78,7 +68,6 @@ export class ScootersService {
                                     price: newRepair.price,
                                 })
                                 .execute();
-                            
 
                 console.log('Processed')
             
