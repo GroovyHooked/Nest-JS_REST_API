@@ -5,15 +5,15 @@ import { Scooter } from "src/scooters/scooter.entity";
 @Entity("repair")
 export class Repair {
 
-    @PrimaryGeneratedColumn({ type: "int" })
+    @PrimaryGeneratedColumn()
     id: number;
 
     @ApiProperty()
-    @Column({ type: "varchar", length: 25 })
+    @Column()
     shortname: string;
 
     @ApiProperty()
-    @Column({ type: "varchar", length: 255 })
+    @Column()
     description: string;
 
     @ApiProperty()
@@ -21,10 +21,10 @@ export class Repair {
     price: number;
 
     @ApiProperty()
-    @Column()
+    @Column({nullable: true})
     scooterId: number;
 
-    @ManyToOne( type => Scooter, scooter => scooter.repairs)
+    @ManyToOne( () => Scooter, scooter => scooter.repairs)
     @JoinColumn({ name: "scooterId"})
     scooter: Scooter;
 

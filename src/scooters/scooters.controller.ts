@@ -1,5 +1,7 @@
 import { Controller, Post, Body, Get, Put, Delete, Param, Query } from '@nestjs/common';
 import { ApiTags, ApiCreatedResponse, ApiQuery, ApiParam } from '@nestjs/swagger';
+import { Repair } from 'src/repairs/repair.entity';
+import { RepairsService } from 'src/repairs/repairs.service';
 import { Scooter } from './scooter.entity';
 import { ScootersService } from './scooters.service';
 
@@ -7,7 +9,9 @@ import { ScootersService } from './scooters.service';
 @ApiTags('Scooters')
 @Controller('scooters')
 export class ScootersController {
-    constructor(public service: ScootersService){}
+    constructor(
+        private service: ScootersService
+        ){}
 
     @Get()
     all() {
@@ -27,9 +31,10 @@ export class ScootersController {
     @ApiCreatedResponse({ description: "Scooter row generated in database" })
     @Post()
     create(@Body() scooter: Scooter) {
-        return this.service.createScooter(scooter);
+             this.service.createScooter(scooter);
     }
-    
+
+
     @Post(':name/:motorization/:brand/:model/:mileage/:shortname/:description/:price')
     @ApiParam({ name: 'price', allowEmptyValue: false, example: '180' })
     @ApiParam({ name: 'description', allowEmptyValue: false, example: 'Moteur' })
@@ -39,8 +44,8 @@ export class ScootersController {
     @ApiParam({ name: 'Brand', allowEmptyValue: false, example: 'Vespa' })
     @ApiParam({ name: 'Motorization', allowEmptyValue: false, example: '50' })
     @ApiParam({ name: 'Name', allowEmptyValue: false, example: 'Martin' })
-    insertScootAndRepair(@Param() params){
-        return this.service.insertScooterWithRepair(params.name, params.motorization, params.brand, params.model, params.mileage, params.shortname, params.description, params.price)
+    insertScootAndRepair(@Param('name') name: string, @Param('motorization') motorization: number, @Param('brand') brand: string, @Param('model') model: string, @Param('mileage') mileage: number, @Param('shortname') shortname: string, @Param('description') description: string, @Param('price') price: number ):any {
+        return this.service.insertScooterWithRepair(name, motorization, brand, model, mileage, shortname, description, price)
     }
 
 

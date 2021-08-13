@@ -29,7 +29,7 @@ export class Scooter {
     mileage: number;
 
     @ApiProperty()
-    @OneToMany( type => Repair, repair => repair.scooter)
+    @OneToMany( () => Repair, repairs => repairs.scooter)
     repairs: Repair[];
 
     addRepair(repair: Repair){

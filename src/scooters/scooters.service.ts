@@ -7,7 +7,12 @@ import { Scooter } from './scooter.entity';
 @Injectable()
 export class ScootersService {
 
-    constructor(@InjectRepository(Scooter) public scootersRepo: Repository<Scooter> ){}
+    constructor(
+        @InjectRepository(Scooter) 
+        public scootersRepo: Repository<Scooter>,
+        @InjectRepository(Repair) 
+        public repairRepo: Repository<Repair>
+        ){}
 
       getScooters(): Promise<Scooter[]> {
         return  this.scootersRepo.find();
@@ -26,6 +31,8 @@ export class ScootersService {
             .where("scooter.id = :id", { id: _id })
             .getOne() as Promise<Scooter>
     }
+
+  
 
     getScooterName(_name: string): Promise<Scooter> {
         return this.scootersRepo.findOne({
@@ -58,18 +65,17 @@ export class ScootersService {
                 newRepair.shortname = repairName;
                 newRepair.description = description;
                 newRepair.price = price;
-                newRepair.scooterId = newScooter.id
-                console.log("scooterId = " + newScooter.id)
+                newRepair.scooter = newScooter;
+
+                console.log("newRepair.scooter = " + newRepair)
                 this.scootersRepo.save(newScooter);
                 this.scootersRepo.createQueryBuilder('repairs')
                                 .insert()
                                 .into(Repair)
                                 .values({
-                                    id: 7,
                                     shortname: newRepair.shortname,
                                     description: newRepair.description,
                                     price: newRepair.price,
-                                    scooterId: 1
                                 })
                                 .execute();
                             
@@ -83,6 +89,9 @@ export class ScootersService {
         this.scootersRepo.insert(scooter)
     }
 
+    async createRepair(repair: Repair) {
+        this.repairRepo.insert(repair)
+    }
     async updateScooter(scooter: Scooter) {
         this.scootersRepo.save(scooter)
     }
